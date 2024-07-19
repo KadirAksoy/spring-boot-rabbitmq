@@ -5,9 +5,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service
+@Component
 public class RabbitMQJsonProducer {
 
     // RabbitMQ'da kullanılacak değişim adı
@@ -19,7 +20,7 @@ public class RabbitMQJsonProducer {
     private String jsonRountingKey;
 
     // Logger tanımlaması
-    private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQJsonProducer.class);
+    //private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQJsonProducer.class);
 
     // RabbitTemplate alanı
     private RabbitTemplate rabbitTemplate;
@@ -31,7 +32,8 @@ public class RabbitMQJsonProducer {
 
     // JSON mesajı gönderme metodu
     public void sendJsonMessage(User user) {
-        LOGGER.info(String.format("JSON Messasge sent-> %s", user.toString()));
+        //LOGGER.info(String.format("JSON Messasge sent-> %s", user.toString()));
+        System.out.println("JSON Messasge sent-> %s"+user.toString());
         rabbitTemplate.convertAndSend(exchange, jsonRountingKey, user);
     }
 
